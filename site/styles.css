@@ -1,0 +1,502 @@
+/* ============================================================
+   TORNO — home estática
+   Marfim, espresso e ouro fosco. Hairlines de 1px, raio 0.
+   Sem frameworks, sem JS.
+   ============================================================ */
+
+:root {
+  --marfim: #F5F1E8;
+  --pedra: #D9D2C4;
+  --linha: #D9D2C4;
+  --tinta: #1A1814;
+  --espresso: #3B342B;
+  --oliva: #6B6559;
+  --ouro: #A98B5B;
+  --ouro-escuro: #7A6340;
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+  --margem: clamp(1.5rem, 8vw, 8rem);
+  --shell: 1440px;
+  --gutter: 1.5rem;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--marfim);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.005em;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, figure, dl, dd { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; }
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--margem);
+}
+
+.skip {
+  position: absolute; top: -100%; left: 1rem; z-index: 99;
+  padding: 0.75rem 1.25rem;
+  background: var(--tinta); color: var(--marfim);
+  font-size: 0.8125rem; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none;
+}
+.skip:focus { top: 1rem; }
+
+:focus-visible { outline: 2px solid var(--tinta); outline-offset: 3px; }
+.rodape :focus-visible { outline-color: var(--marfim); }
+
+/* ---------- Tipografia ---------- */
+
+.overline {
+  font-family: var(--sans);
+  font-size: 0.6875rem; font-weight: 500;
+  line-height: 1.45; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ouro-escuro);
+}
+.overline .num {
+  margin-right: 0.9em;
+  color: var(--oliva);
+  font-variant-numeric: tabular-nums;
+}
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 300; color: var(--tinta); }
+h1 {
+  font-size: clamp(2.5rem, 1.6rem + 3.2vw, 3.75rem);
+  line-height: 1.07;
+  letter-spacing: -0.015em;
+}
+h2 {
+  font-size: clamp(2rem, 1.4rem + 1.9vw, 2.75rem);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+h3 { line-height: 1.25; }
+
+.lead {
+  max-width: 36ch;
+  font-size: clamp(1.25rem, 1.13rem + 0.35vw, 1.375rem);
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+/* ---------- Cabeçalho ---------- */
+
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--marfim);
+  border-bottom: 1px solid var(--linha);
+}
+.topo__interno {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem 1.5rem;
+  padding-block: 0.9rem;
+}
+.marca {
+  font-family: var(--serif);
+  font-size: 1.625rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.nav { order: 3; width: 100%; }
+.nav__lista { display: flex; flex-wrap: wrap; gap: 1.25rem 1.5rem; }
+.nav__lista a,
+.nav__cta {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.nav__lista a {
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid transparent;
+  transition: color 300ms ease, border-color 300ms ease;
+}
+.nav__lista a:hover,
+.nav__lista a:focus-visible { color: var(--ouro-escuro); border-color: var(--ouro-escuro); }
+.nav__cta {
+  padding-bottom: 0.15rem;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--tinta);
+  transition: color 300ms ease, border-color 300ms ease;
+}
+.nav__cta:hover { color: var(--ouro-escuro); border-color: var(--ouro-escuro); }
+
+@media (min-width: 768px) {
+  .topo__interno { flex-wrap: nowrap; min-height: 5.5rem; padding-block: 0; }
+  .marca { font-size: 1.75rem; }
+  .nav { order: 0; width: auto; margin-left: auto; }
+  .nav__lista { gap: 2.5rem; }
+  .nav__lista a, .nav__cta { font-size: 0.8125rem; }
+  .nav__cta { margin-left: 2.5rem; }
+}
+
+/* ---------- Ações ---------- */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.9rem 2rem;
+  background: var(--tinta);
+  color: var(--marfim);
+  border: 1px solid var(--tinta);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 300ms ease, border-color 300ms ease;
+}
+.botao:hover { background: var(--espresso); border-color: var(--ouro); }
+.botao:active { background: #14120f; }
+
+.link-editorial {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.45em;
+  transition: color 300ms ease;
+}
+.link-editorial:hover { color: var(--ouro-escuro); text-decoration-thickness: 2px; }
+
+/* ---------- Hero ---------- */
+
+.hero { padding-block: clamp(3.5rem, 8vw, 7.5rem) clamp(4rem, 8vw, 6.5rem); }
+.hero__grade { display: grid; gap: 3rem; }
+.hero__texto .overline { margin-bottom: clamp(1.5rem, 4vw, 2.5rem); }
+.hero__texto h1 { margin-bottom: 2rem; }
+.hero__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 2.5rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+.hero__figura { width: 100%; max-width: 26rem; margin: 0; }
+
+.hero__figura figcaption,
+.atelier__figura figcaption {
+  margin-top: 0.875rem;
+  font-size: 0.8125rem; line-height: 1.54; letter-spacing: 0.01em;
+  color: var(--oliva);
+}
+
+@media (min-width: 1024px) {
+  .hero__grade {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+    align-items: end;
+  }
+  .hero__texto { grid-column: 1 / span 7; padding-bottom: 1.5rem; }
+  .hero__figura { grid-column: 9 / span 4; max-width: none; }
+}
+
+/* ---------- Seções ---------- */
+
+.secao {
+  padding-block: 6rem;
+  border-top: 1px solid var(--linha);
+  scroll-margin-top: 6.5rem;
+}
+.secao__cabeca { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.secao__cabeca h2 { margin-top: 1.25rem; }
+
+/* ---------- Peças ---------- */
+
+.pecas { display: grid; gap: 3rem; }
+.peca .arte { aspect-ratio: 3 / 4; max-width: 28rem; }
+
+.peca__num {
+  margin-top: 1.25rem;
+  font-size: 0.75rem; font-weight: 400; line-height: 1.33;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--oliva); font-variant-numeric: tabular-nums;
+}
+.peca__nome { margin-top: 0.4rem; font-size: 1.625rem; font-weight: 400; }
+.peca__meta { margin-top: 0.35rem; font-size: 0.8125rem; line-height: 1.54; color: var(--oliva); }
+.peca__preco {
+  margin-top: 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (hover: hover) {
+  .peca:hover .peca__nome {
+    text-decoration: underline;
+    text-decoration-color: var(--ouro);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+}
+
+@media (min-width: 900px) {
+  .pecas { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+}
+
+/* ---------- Ateliê ---------- */
+
+.atelier { display: grid; gap: 3rem; }
+.atelier__figura { width: 100%; max-width: 32rem; margin: 0; }
+.atelier__texto .overline { margin-bottom: 1.25rem; }
+.atelier__texto h2 { margin-bottom: 1.75rem; max-width: 18ch; }
+.atelier__texto p { max-width: 48ch; }
+.atelier__texto p + p { margin-top: 1.25rem; }
+.atelier__texto .assinatura {
+  margin-top: 2rem;
+  font-family: var(--serif);
+  font-size: 1.625rem;
+  font-style: normal;
+  line-height: 1.4;
+  color: var(--espresso);
+  text-wrap: balance;
+}
+
+@media (min-width: 1024px) {
+  .atelier {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+    align-items: center;
+  }
+  .atelier__figura { grid-column: 1 / span 5; max-width: none; }
+  .atelier__texto { grid-column: 7 / span 5; }
+}
+
+/* ---------- Contato ---------- */
+
+.contato { display: grid; gap: 3rem; }
+.contato h2 { margin: 1.25rem 0 1.5rem; max-width: 20ch; }
+.contato__lead { max-width: 42ch; }
+.contato__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 2rem;
+  margin-top: 2.5rem;
+}
+.contato__nota {
+  margin-top: 1.5rem; max-width: 38ch;
+  font-size: 0.8125rem; line-height: 1.6;
+  color: var(--oliva);
+}
+
+.dados { border-top: 1px solid var(--linha); }
+.dado { padding: 1.15rem 0; border-bottom: 1px solid var(--linha); }
+.dado dt {
+  font-size: 0.6875rem; font-weight: 500; line-height: 1.45;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--oliva);
+}
+.dado dd { margin-top: 0.4rem; font-size: 1rem; line-height: 1.6; }
+
+@media (min-width: 1024px) {
+  .contato {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+    align-items: start;
+  }
+  .contato__intro { grid-column: 1 / span 6; }
+  .dados { grid-column: 8 / span 4; margin-top: 0.5rem; }
+}
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+  padding-block: clamp(3.5rem, 8vw, 6rem) 2rem;
+  background: var(--espresso);
+  color: var(--marfim);
+}
+.rodape__topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(245, 241, 232, 0.22);
+}
+.rodape__marca {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+.rodape__tagline {
+  font-family: var(--serif);
+  font-size: 1.625rem;
+  line-height: 1.4;
+  color: var(--pedra);
+}
+.rodape__grade { display: grid; gap: 2.25rem; padding-block: 2.5rem; }
+.rodape__col .overline { margin-bottom: 0.9rem; color: var(--pedra); }
+.rodape__col p,
+.rodape__col address {
+  max-width: 32ch;
+  font-size: 1rem;
+  font-style: normal;
+  line-height: 1.7;
+}
+.rodape__col p + p { margin-top: 0.35rem; }
+.rodape__col a {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245, 241, 232, 0.4);
+  padding-bottom: 0.1rem;
+  transition: border-color 300ms ease;
+}
+.rodape__col a:hover { border-color: var(--marfim); }
+.rodape__base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(245, 241, 232, 0.22);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--pedra);
+}
+
+@media (min-width: 768px) {
+  .rodape__grade { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+}
+
+/* ---------- Arte em CSS (substitui fotografia) ---------- */
+
+.arte {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: var(--pedra);
+}
+.arte::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(130% 100% at 28% 18%, #EFE9DC 0%, #E3DBCA 48%, #D5CDBD 100%);
+}
+.arte::after {
+  content: ""; position: absolute; inset: 0; z-index: 2;
+  pointer-events: none; opacity: 0.55;
+  background-image: repeating-linear-gradient(112deg, rgba(59, 52, 43, 0.045) 0 1px, transparent 1px 4px);
+}
+.forma { position: absolute; z-index: 1; display: block; }
+
+/* Hero — aro com pedra */
+.arte--hero { aspect-ratio: 3 / 4; }
+.forma--aro {
+  top: 17%; left: 19%; width: 62%; aspect-ratio: 1;
+  border: 1px solid var(--ouro); border-radius: 50%;
+}
+.forma--aro::after {
+  content: ""; position: absolute; top: -7%; left: 38%; width: 24%;
+  aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #8A7450 0%, #5A4A33 45%, #2E2A24 100%);
+}
+
+/* Anel */
+.forma--anel {
+  top: 31%; left: 24%; width: 52%; aspect-ratio: 1;
+  border: 1px solid var(--ouro-escuro); border-radius: 50%;
+}
+.forma--anel::after {
+  content: ""; position: absolute; top: -8%; left: 37%; width: 26%;
+  aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #6B6559 0%, #403A2F 55%, #2E2A24 100%);
+}
+
+/* Brinco — par de gotas */
+.forma--brinco { top: 30%; left: 28%; width: 44%; height: 38%; }
+.forma--brinco::before,
+.forma--brinco::after {
+  content: ""; position: absolute; top: 0; width: 32%; height: 100%;
+  border: 1px solid var(--ouro-escuro); border-radius: 50%;
+}
+.forma--brinco::before { left: 0; }
+.forma--brinco::after { right: 0; }
+
+/* Colar — corrente em arco e pingente */
+.forma--colar {
+  top: 14%; left: 9%; width: 82%; height: 58%;
+  border: 1px solid transparent; border-bottom-color: var(--ouro-escuro);
+  border-radius: 50%;
+}
+.forma--colar::after {
+  content: ""; position: absolute; top: calc(100% - 0.1rem); left: 50%;
+  width: 0.85rem; height: 0.85rem; transform: translateX(-50%);
+  border: 1px solid var(--ouro-escuro); border-radius: 50%;
+  background: var(--espresso);
+}
+
+/* Ateliê — bancada e luz */
+.arte--atelier { aspect-ratio: 1; }
+.forma--bancada {
+  inset: 0;
+  background:
+    linear-gradient(rgba(59, 52, 43, 0.30), rgba(59, 52, 43, 0.30)) 18% 62% / 64% 1px no-repeat,
+    linear-gradient(rgba(59, 52, 43, 0.20), rgba(59, 52, 43, 0.20)) 18% 74% / 44% 1px no-repeat;
+}
+.forma--bancada::after {
+  content: ""; position: absolute; top: 14%; left: 23%; width: 54%;
+  aspect-ratio: 1; border: 1px solid var(--ouro); border-radius: 50%;
+}
+
+/* ---------- Movimento ---------- */
+
+@keyframes entra {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero__texto > * { animation: entra 800ms cubic-bezier(0.25, 0.1, 0.25, 1) both; }
+.hero__texto > :nth-child(2) { animation-delay: 80ms; }
+.hero__texto > :nth-child(3) { animation-delay: 160ms; }
+.hero__texto > :nth-child(4) { animation-delay: 240ms; }
+.hero__figura { animation: entra 1200ms cubic-bezier(0.25, 0.1, 0.25, 1) 120ms both; }
+
+@media (min-width: 1024px) {
+  .secao { padding-block: 10rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
