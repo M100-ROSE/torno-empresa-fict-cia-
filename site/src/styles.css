@@ -1,7 +1,7 @@
 /* ============================================================
-   TORNO — home estática
+   TORNO — folha de estilo global (importada em src/main.js)
    Marfim, espresso e ouro fosco. Hairlines de 1px, raio 0.
-   Sem frameworks, sem JS.
+   Sem framework de CSS: um único arquivo, sem escopo por componente.
    ============================================================ */
 
 :root {
